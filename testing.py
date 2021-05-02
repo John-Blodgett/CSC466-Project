@@ -9,7 +9,6 @@ def get_file_metadata(path, filename, metadata):
         attr_value = ns.GetDetailsOf(item, ind)
         if attr_value:
             file_metadata[attribute] = attr_value
-
     return file_metadata
 
 if __name__ == '__main__':
