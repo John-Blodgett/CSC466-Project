@@ -1,5 +1,17 @@
 import win32com.client
 
+# returns a distribution of all the bytes in the file
+def get_file_distribution(file):
+    dists = [0 for i in range(256)]
+
+    with open(file, "rb") as f:
+        byte = f.read(1)
+        while byte:
+            dists[byte[0]] += 1
+            byte = f.read(1)
+
+    return dists
+
 def get_file_metadata(path, filename, metadata):
     sh = win32com.client.gencache.EnsureDispatch('Shell.Application', 0)
     ns = sh.NameSpace(path)
