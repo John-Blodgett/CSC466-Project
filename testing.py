@@ -1,6 +1,7 @@
 import win32com.client
 
-def get_file_metadata(path, filename, metadata):
+def get_file_metadata(path, filename):
+    metadata = ['Name', 'Size', 'Item type']
     sh = win32com.client.gencache.EnsureDispatch('Shell.Application', 0)
     ns = sh.NameSpace(path)
     file_metadata = dict()
@@ -12,7 +13,7 @@ def get_file_metadata(path, filename, metadata):
     return file_metadata
 
 if __name__ == '__main__':
-    folder = r"C:\Users\johne\PycharmProjects\CSC466-Project\pdfs"
+    path = r"C:\Users\johne\PycharmProjects\CSC466-Project\images"
     filename = 'fish.jpg'
-    metadata = ['Name', 'Size', 'Item type', 'Date modified', 'Date created']
-    print(get_file_metadata(folder, filename, metadata))
+
+    print(get_file_metadata(path, filename))
