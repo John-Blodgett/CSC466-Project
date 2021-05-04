@@ -1,4 +1,5 @@
 import win32com.client
+import os.path
 
 # returns a distribution of all the bytes in the file
 def get_file_distribution(file):
@@ -12,19 +13,11 @@ def get_file_distribution(file):
 
     return dists
 
-def get_file_metadata(path, filename, metadata):
-    metadata = ['Name', 'Size', 'Item type', 'Date modified', 'Date created']
-    sh = win32com.client.gencache.EnsureDispatch('Shell.Application', 0)
-    ns = sh.NameSpace(path)
-    file_metadata = dict()
-    item = ns.ParseName(str(filename))
-    for ind, attribute in enumerate(metadata):
-        attr_value = ns.GetDetailsOf(item, ind)
-        if attr_value:
-            file_metadata[attribute] = attr_value
-    return file_metadata
+def get_file_metadata(path, filename):
+    fullPath = path + "\\" + filename
+    return os.path.getsize(fullPath) / 1000000, os.path.splitext(fullPath)[1]
 
 if __name__ == '__main__':
-    folder = r"C:\Users\johne\PycharmProjects\CSC466-Project\pdfs"
+    path = r"C:\Users\johne\PycharmProjects\CSC466-Project\images"
     filename = 'fish.jpg'
-    print(get_file_metadata(folder, filename, ))
+    print(get_file_metadata(path, filename))
