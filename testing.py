@@ -27,7 +27,7 @@ def get_file_distribution(file):
             
             byte = f.read(1)
 
-    return dists
+    return dists, consecutive_byte, consecutive_count
 
 def get_file_metadata(path, filename):
     fullPath = path + "\\" + filename
