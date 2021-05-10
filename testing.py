@@ -46,17 +46,20 @@ def dataGeneration():
     count = 0
     for filename in glob.glob(os.path.join(path, '*.pdf')):
         with open(os.path.join(os.getcwd(), filename), 'rb') as f:
-            sha3 = hashlib.sha3_256(f.read()).hexdigest()
-            md5 = hashlib.md5(f.read()).hexdigest()
-            sha2 = hashlib.sha256(f.read()).hexdigest()
-            sha1 = hashlib.sha1(f.read()).hexdigest()
+            readFile = f.read()
+            sha3 = hashlib.sha3_256(readFile).hexdigest()
+            md5 = hashlib.md5(readFile).hexdigest()
+            sha2 = hashlib.sha256(readFile).hexdigest()
+            sha1 = hashlib.sha1(readFile).hexdigest()
             bytedist, consecutiveByte, consecutiveCount = get_file_distribution(path, filename)
             fileSize, fileType = get_file_metadata(path, filename)
             row = [filename, fileSize, fileType, str(bytedist), consecutiveByte, str(consecutiveCount), sha2, sha1, md5, sha3]
-            # print(row)
+            # print(sha2)
             print(count)
             count += 1
             csvwriter.writerow(row)
+        # if count == 5:
+        #     break
         # break
 
 if __name__ == '__main__':
