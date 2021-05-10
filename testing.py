@@ -38,13 +38,13 @@ def get_file_metadata(path, filename):
 
 def dataGeneration():
     fields = ['filename', 'file size', 'file type', 'file dist of bytes', 'consecutiveByte', 'consecutiveCount' ,'SHA-256', 'SHA-1', 'MD5', 'SHA-3-256']
-    file = open("pdfHash.csv", "w")
+    file = open("jpgHash.csv", "w")
     csvwriter = csv.writer(file)
     csvwriter.writerow(fields)
-    path = r"/mnt/f/pdfs/"
+    path = r"/mnt/f/natural_images/airplane/"
     print(path)
     count = 0
-    for filename in glob.glob(os.path.join(path, '*.pdf')):
+    for filename in glob.glob(os.path.join(path, '*.jpg')):
         with open(os.path.join(os.getcwd(), filename), 'rb') as f:
             readFile = f.read()
             sha3 = hashlib.sha3_256(readFile).hexdigest()
